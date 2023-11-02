@@ -17,7 +17,8 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\War\WarAlternativesScreen;
+use App\Orchid\Screens\War\WarAlternativeEditScreen;
+use App\Orchid\Screens\War\WarAlternativesListScreen;
 use App\Orchid\Screens\War\WarExpensesListScreen;
 use App\Orchid\Screens\War\WarExpensesEditScreen;
 use App\Orchid\Screens\War\WarScreen;
@@ -54,18 +55,32 @@ Route::screen('war/expenses', WarExpensesListScreen::class)
         ->push(__('Expenses'), route('platform.war.expenses')));
 
 // Platform > War > Expenses > Edit
-Route::screen('war/expenses/{expenses}', WarExpensesEditScreen::class)
+Route::screen('war/expenses/{expenses?}', WarExpensesEditScreen::class)
     ->name('platform.war.expenses.edit')
     ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.war')
+        ->parent('platform.war.expenses')
         ->push(__('Expenses Edit'), route('platform.war.expenses.edit')));
 
 // Platform > War > Alternatives
-Route::screen('war/alternatives', WarAlternativesScreen::class)
+Route::screen('war/alternatives', WarAlternativesListScreen::class)
     ->name('platform.war.alternatives')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.war')
         ->push(__('Alternatives'), route('platform.war.alternatives')));
+
+// Platform > War > Alternatives > Create
+Route::screen('war/alternatives/create', WarAlternativeEditScreen::class)
+    ->name('platform.war.alternatives.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.war.alternatives')
+        ->push(__('Alternative Edit'), route('platform.war.alternatives.create')));
+
+// Platform > War > Alternatives > Edit
+Route::screen('war/alternatives/{alternative?}', WarAlternativeEditScreen::class)
+    ->name('platform.war.alternatives.edit')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.war.alternatives')
+        ->push(__('Alternative Edit'), route('platform.war.alternatives.edit')));
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

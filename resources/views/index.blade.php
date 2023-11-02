@@ -11,7 +11,10 @@
 </head>
 <body>
 <div id="app">
-    <app></app>
+    <app
+            :amount="{{ $amount }}"
+            :alternatives="{{ $alternatives }}"
+    ></app>
 </div>
 </body>
 </html>

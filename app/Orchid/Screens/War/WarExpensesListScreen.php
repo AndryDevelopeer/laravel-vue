@@ -7,6 +7,7 @@ use App\Orchid\Layouts\War\WarExpensesListLayout;
 use App\Orchid\Layouts\War\WarTab;
 use JetBrains\PhpStorm\ArrayShape;
 use Orchid\Screen\Action;
+use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
 class WarExpensesListScreen extends Screen
@@ -16,7 +17,7 @@ class WarExpensesListScreen extends Screen
      *
      * @return array
      */
-    #[ArrayShape(['expenses' => "mixed"])] public function query(): iterable
+     #[ArrayShape(['expenses' => "mixed"])] public function query(): iterable
     {
         return [
             'expenses' => Expenses::paginate()
@@ -34,6 +35,14 @@ class WarExpensesListScreen extends Screen
     }
 
     /**
+     * The description is displayed on the user's screen under the heading
+     */
+    public function description(): ?string
+    {
+        return "All expenses";
+    }
+
+    /**
      * The screen's action buttons.
      *
      * @return Action[]
@@ -46,7 +55,7 @@ class WarExpensesListScreen extends Screen
     /**
      * The screen's layout elements.
      *
-     * @return iterable
+     * @return Layout[]
      */
     public function layout(): iterable
     {

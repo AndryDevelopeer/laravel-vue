@@ -2,31 +2,26 @@
 
 namespace App\Orchid\Screens\War;
 
+use App\Orchid\Layouts\War\WarAlternativesListLayout;
+use Illuminate\Http\RedirectResponse;
 use App\Orchid\Layouts\War\WarTab;
-use Orchid\Screen\Action;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\CheckBox;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Password;
-use Orchid\Screen\Fields\Radio;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Screen;
+use JetBrains\PhpStorm\ArrayShape;
 use Orchid\Support\Facades\Alert;
-use Orchid\Support\Facades\Layout;
+use Orchid\Screen\Actions\Link;
+use App\Models\Alternative;
+use Orchid\Screen\Action;
+use Orchid\Screen\Layout;
+use Orchid\Screen\Screen;
 
-class WarAlternativesScreen extends Screen
+class WarAlternativesListScreen extends Screen
 {
     /**
-     * Fetch data to be displayed on the screen.
-     *
      * @return array
      */
-    public function query(): iterable
+    #[ArrayShape(['alternative' => 'mixed'])] public function query(): array
     {
         return [
-            'name' => 'Hello! We collected all the fields in one place',
+            'alternative' => Alternative::paginate()
         ];
     }
 
@@ -53,38 +48,42 @@ class WarAlternativesScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make('Создать')
+            ->class('btn btn-primary')
+            ->route('platform.war.alternatives.create')
+        ];
     }
 
     /**
      * The screen's layout elements.
      *
-     * @return \Orchid\Screen\Layout[]
+     * @return Layout[]
      */
     public function layout(): iterable
     {
         return [
-
             WarTab::class,
-            Layout::rows([
-
-                Input::make('number')
-                    ->type('number')
-                    ->title('Сумма в рублях')
-                    ->value(42)
-                    ->horizontal(),
-
-                Button::make('Submit')
-                    ->method('buttonClickProcessing'),
-                    //->type(NCURSES_COLOR_BLUE),
-
-            ]), //->title('Textual HTML5 Inputs'),
-
+            WarAlternativesListLayout::class
         ];
     }
 
     public function buttonClickProcessing()
     {
         Alert::warning('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.');
+    }
+
+    /**
+     * @param Alternative $alternative
+     *
+     * @return RedirectResponse
+     */
+    public function deleteAlternative(Alternative $alternative): RedirectResponse
+    {
+        $alternative->delete();
+
+        Alert::info('Запись успешно удалена.');
+
+        return redirect()->route('platform.war.alternatives');
     }
 }

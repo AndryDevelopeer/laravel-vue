@@ -10,25 +10,25 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
 use Illuminate\Http\Request;
+use App\Models\Alternative;
 use Orchid\Screen\Action;
 use Orchid\Screen\Screen;
-use App\Models\Expenses;
 
-class WarExpensesEditScreen extends Screen
+class WarAlternativeEditScreen extends Screen
 {
     /**
-     * @var Expenses|null
+     * @var Alternative|null
      */
-    public Expenses|null $expenses = null;
+    public Alternative|null $alternative = null;
 
     /**
-     * @param Expenses $expenses
+     * @param Alternative $alternative
      * @return array
      */
-    #[ArrayShape(['expenses' => "\App\Models\Expenses"])] public function query(Expenses $expenses): array
+    #[ArrayShape(['alternative' => "\App\Models\Alternative"])] public function query(Alternative $alternative): array
     {
         return [
-            'expenses' => $expenses
+            'alternative' => $alternative
         ];
     }
 
@@ -37,7 +37,7 @@ class WarExpensesEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'War expenses edit';
+        return 'Alternative expenses edit';
     }
 
     /**
@@ -45,7 +45,7 @@ class WarExpensesEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Затрачено на войну с Украиной с 24.02.2022 г.';
+        return 'Альтернативная трата вместо войны';
     }
 
     /**
@@ -68,18 +68,18 @@ class WarExpensesEditScreen extends Screen
         return [
             Layout::rows([
                 Label::make('id')
-                    ->title('ID')
-                    ->value($this->expenses->id)
+                    ->title($this->alternative->id ? 'ID' : '')
+                    ->value($this->alternative->id)
                     ->horizontal(),
                 Input::make('name')
                     ->type('text')
-                    ->title('Статья расходов')
-                    ->value($this->expenses->name)
+                    ->title('Название альтернативы')
+                    ->value($this->alternative->name)
                     ->horizontal(),
                 Input::make('price')
                     ->type('number')
-                    ->title('Сумма в рублях')
-                    ->value($this->expenses->price)
+                    ->title('Стоимость реализации за единицу')
+                    ->value($this->alternative->price)
                     ->horizontal(),
                 Button::make('Сохранить')
                     ->class('btn btn-success')
@@ -94,20 +94,20 @@ class WarExpensesEditScreen extends Screen
     }
 
     /**
-     * @param Expenses $expenses
+     * @param Alternative $alternative
      * @param Request $request
      *
      * @return RedirectResponse
      */
-    public function createOrUpdate(Expenses $expenses, Request $request): RedirectResponse
+    public function createOrUpdate(Alternative $alternative, Request $request): RedirectResponse
     {
-        $expenses->fill([
-            'name' =>$request->get('name'),
+        $alternative->fill([
+            'name' => $request->get('name'),
             'price' => $request->get('price')
         ])->save();
 
-        Alert::info('You have successfully created a expenses.');
+        Alert::info('You have successfully created a post.');
 
-        return redirect()->route('platform.war.expenses');
+        return redirect()->route('platform.war.alternatives');
     }
 }

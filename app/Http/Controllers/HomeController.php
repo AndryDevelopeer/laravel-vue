@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alternative;
+use App\Models\Expenses;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $expenses = Expenses::first();
+        $alternatives = Alternative::all();
+
+        return view('index', ['amount' => $expenses->price, 'alternatives' => $alternatives]);
     }
 }

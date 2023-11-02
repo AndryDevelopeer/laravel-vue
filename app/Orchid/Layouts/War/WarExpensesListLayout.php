@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\War;
 
 use App\Models\Expenses;
+use Illuminate\Support\Carbon;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -32,9 +33,18 @@ class WarExpensesListLayout extends Table
                     return Link::make($expenses->name)
                         ->route('platform.war.expenses.edit', $expenses);
                 }),
-            TD::make('price', 'Всего потрачено'),
-            TD::make('created_at', 'Создано'),
-            TD::make('updated_at', 'Обновлено'),
+            TD::make('price', 'Всего потрачено')
+                ->render(function (Expenses $expenses) {
+                    return number_format($expenses->price, 0, ',', ' ');
+                }),
+            TD::make('created_at', 'Создано')
+                ->render(function (Expenses $expenses) {
+                    return Carbon::parse($expenses->created_at)->format('d.m.Y H:i:s');
+                }),
+            TD::make('updated_at', 'Обновлено')
+                ->render(function (Expenses $expenses) {
+                    return Carbon::parse($expenses->updated_at)->format('d.m.Y H:i:s');
+                }),
         ];
     }
 }

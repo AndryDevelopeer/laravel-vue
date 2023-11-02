@@ -1,41 +1,49 @@
 <template>
     <section>
-        <Counter :total="count" />
+        <Counter :total="count"/>
         <div class="example">
             <h3>Можно было построить:</h3>
-            <School :total="count" />
-            <Burj :total="count"/>
-            <Road :total="count"/>
-            <Apartment :total="count"/>
-            <City :total="count"/>
+            <Alternative
+                v-for="item in alternatives"
+                :total="count"
+                :alternative="item"
+            />
         </div>
     </section>
 </template>
 
 <script lang="ts">
-import Counter from '@/components/Counter/Counter.vue'
-import School from '@/components/Analogs/School.vue'
-import Burj from "@/components/Analogs/Burj.vue";
-import Road from "@/components/Analogs/Road.vue";
-import Apartment from "@/components/Analogs/Apartment.vue";
-import City from "@/components/Analogs/City.vue";
+import Counter from './Counter/Counter.vue'
+import Alternative from "./Alternative/Alternative.vue"
 
 export default {
-    components: {City, Apartment, Road, Burj, Counter, School },
+    components: {Alternative, Counter},
+    props: {
+        amount: {
+            type: Number,
+            required: true
+        },
+        alternatives: {
+            type: Array,
+            required: true
+        },
+    },
     data() {
         return {
-            count: 16730056058310
+            count: 0
         }
     },
     methods: {
         setCount() {
             setInterval(() => {
-                this.count+=3540
+                this.count += 3540
             }, 10)
         }
     },
     mounted() {
+        this.count = this.amount
         this.setCount()
+        console.log(this.alternatives)
     }
 }
 </script>
