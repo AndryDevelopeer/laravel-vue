@@ -1,14 +1,15 @@
 <template>
     <div class="wrapper">
-        <Digits :total="total" />
+        <Digits :total="total"/>
     </div>
 </template>
 
 <script lang="ts">
-import Digits from '@/components/Counter/Digits.vue'
+import Digits from './Digits.vue'
+
 export default {
     name: 'Counter',
-    components: { Digits },
+    components: {Digits},
     props: {
         total: {
             type: Number,
@@ -19,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-    .wrapper {
-        margin-bottom: 1rem;
-    }
+.wrapper {
+    margin-bottom: 1rem;
+}
 </style>

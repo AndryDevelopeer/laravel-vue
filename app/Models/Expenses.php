@@ -11,6 +11,8 @@ class Expenses extends Model
 {
     use SoftDeletes, HasFactory, AsSource;
 
+    const DEFAULT_PRICE = 16730056058310;
+
     protected $fillable = ['name', 'price'];
 
     protected $dates = [

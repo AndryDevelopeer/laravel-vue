@@ -33,7 +33,7 @@ RUN apt-get update \
   && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
   && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
   && apt-get install -y nodejs \
-  && npm install -g npm \
+  && npm install -g npm@7 \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
   && echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list \

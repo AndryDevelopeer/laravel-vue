@@ -1,10 +1,12 @@
 <template>
     <div>
-        {{ apartmentAmount }} {{alternative.name}}
+        {{ apartmentAmount }} {{ alternative.name }}
     </div>
 </template>
 
 <script lang="ts">
+import {IAlternative} from "../../interfaces/IAlternative"
+
 export default {
     name: "Alternative",
     props: {
@@ -13,12 +15,12 @@ export default {
             required: true
         },
         alternative: {
-            type: Object,
+            type: Object as () => IAlternative,
             required: true
         }
     },
     computed: {
-        apartmentAmount() {
+        apartmentAmount(): number {
             return Math.floor(this.total / this.alternative.price)
         }
     }

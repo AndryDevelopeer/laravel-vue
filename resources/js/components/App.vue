@@ -15,6 +15,7 @@
 <script lang="ts">
 import Counter from './Counter/Counter.vue'
 import Alternative from "./Alternative/Alternative.vue"
+import {IAlternative} from "../interfaces/IAlternative";
 
 export default {
     components: {Alternative, Counter},
@@ -24,7 +25,7 @@ export default {
             required: true
         },
         alternatives: {
-            type: Array,
+            type: Array as () => IAlternative[],
             required: true
         },
     },
@@ -34,13 +35,13 @@ export default {
         }
     },
     methods: {
-        setCount() {
+        setCount(): void {
             setInterval(() => {
                 this.count += 3540
             }, 10)
         }
     },
-    mounted() {
+    mounted(): void {
         this.count = this.amount
         this.setCount()
         console.log(this.alternatives)
