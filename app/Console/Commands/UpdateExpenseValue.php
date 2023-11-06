@@ -28,7 +28,7 @@ class UpdateExpenseValue extends Command
     {
         $expense = Expenses::first();
         if ($expense) {
-            $expense->update(['price' => 666]);
+            $expense->update(['price' => $expense->price += 66600]);
             $this->info('Value updated successfully.');
         } else {
             $this->error('No expenses found.');

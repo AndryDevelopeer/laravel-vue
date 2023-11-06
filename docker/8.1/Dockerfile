@@ -14,7 +14,7 @@ ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
-  && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 \
+  && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 cron \
   && mkdir -p ~/.gnupg \
   && chmod 600 ~/.gnupg \
   && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
@@ -50,6 +50,9 @@ RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
+
+COPY ./cron/cronjobs /etc/cron.d/cronjobs
+RUN chmod 0644 /etc/cron.d/cronjobs && crontab /etc/cron.d/cronjobs
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
