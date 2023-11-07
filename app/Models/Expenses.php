@@ -13,7 +13,7 @@ class Expenses extends Model
 
     const DEFAULT_PRICE = 16730056058310;
 
-    protected $fillable = ['name', 'price'];
+    protected $fillable = ['name', 'price', 'cost_per_second'];
 
     protected $dates = [
         'created_at',

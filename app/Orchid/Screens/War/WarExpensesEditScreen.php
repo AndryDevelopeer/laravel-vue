@@ -81,6 +81,11 @@ class WarExpensesEditScreen extends Screen
                     ->title('Сумма в рублях')
                     ->value($this->expenses->price)
                     ->horizontal(),
+                Input::make('cost_per_second')
+                    ->type('number')
+                    ->title('Траты в секунду в рублях')
+                    ->value($this->expenses->cost_per_second)
+                    ->horizontal(),
                 Button::make('Сохранить')
                     ->class('btn btn-success')
                     ->method('createOrUpdate'),
@@ -103,7 +108,8 @@ class WarExpensesEditScreen extends Screen
     {
         $expenses->fill([
             'name' =>$request->get('name'),
-            'price' => $request->get('price')
+            'price' => $request->get('price'),
+            'cost_per_second' => $request->get('cost_per_second'),
         ])->save();
 
         Alert::info('You have successfully created a expenses.');

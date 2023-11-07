@@ -32,24 +32,23 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make('Get Started')
+            /*Menu::make('Get Started')
                 ->icon('bs.book')
                 ->title('Navigation')
-                ->route(config('platform.index')),
+                ->route(config('platform.index')),*/
 
             Menu::make('War')
                 ->icon('bs.bar-chart')
                 ->route('platform.war'),
 
-            Menu::make('Sample Screen')
+            /*Menu::make('Sample Screen')
                 ->icon('bs.collection')
                 ->route('platform.example')
                 ->badge(fn () => 6),
 
             Menu::make('Form Elements')
                 ->icon('bs.card-list')
-                ->route('platform.example.fields')
-                ->active('*/examples/form/*'),
+                ->route('platform.example.fields'),
 
             Menu::make('Overview Layouts')
                 ->icon('bs.window-sidebar')
@@ -57,16 +56,16 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Grid System')
                 ->icon('bs.columns-gap')
-                ->route('platform.example.grid'),
+                ->route('platform.example.grid'),*/
 
-            Menu::make('Charts')
+            Menu::make('Visitors')
                 ->icon('bs.bar-chart')
                 ->route('platform.example.charts'),
 
-            Menu::make('Cards')
+            /*Menu::make('Cards')
                 ->icon('bs.card-text')
                 ->route('platform.example.cards')
-                ->divider(),
+                ->divider(),*/
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
@@ -86,11 +85,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->url('https://orchid.software/en/docs')
                 ->target('_blank'),
 
-            Menu::make('Changelog')
+            /*Menu::make('Changelog')
                 ->icon('bs.box-arrow-up-right')
                 ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
                 ->target('_blank')
-                ->badge(fn () => Dashboard::version(), Color::DARK),
+                ->badge(fn () => Dashboard::version(), Color::DARK),*/
         ];
     }
 

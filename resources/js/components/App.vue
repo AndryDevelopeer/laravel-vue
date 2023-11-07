@@ -28,6 +28,10 @@ export default {
             type: Array as () => IAlternative[],
             required: true
         },
+        costPerSecond: {
+            type: Number,
+            required: true
+        }
     },
     data() {
         return {
@@ -36,9 +40,10 @@ export default {
     },
     methods: {
         setCount(): void {
+            const factor = 100
             setInterval(() => {
-                this.count += 3540
-            }, 10)
+                this.count += this.costPerSecond / factor
+            }, 1000 / factor)
         }
     },
     mounted(): void {

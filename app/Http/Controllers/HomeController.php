@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Support\Renderable;
+use ipinfo\ipinfo\IPinfoException;
 use App\Models\Alternative;
+use ipinfo\ipinfo\IPinfo;
 use App\Models\Expenses;
 use App\Models\Visitor;
-use Illuminate\Contracts\Support\Renderable;
-use ipinfo\ipinfo\IPinfo;
-use ipinfo\ipinfo\IPinfoException;
 
 class HomeController extends Controller
 {
@@ -46,7 +46,11 @@ class HomeController extends Controller
                 'device' => request()->header('User-Agent'),
             ]);
 
-            return view('index', ['amount' => $expenses->price, 'alternatives' => $alternatives]);
+            return view('index', [
+                'amount' => $expenses->price,
+                'costPerSecond' => $expenses->cost_per_second,
+                'alternatives' => $alternatives
+            ]);
         }
     }
 }

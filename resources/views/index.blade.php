@@ -13,6 +13,7 @@
 <div id="app">
     <app
             :amount="{{ $amount }}"
+            :cost-per-second="{{ $costPerSecond }}"
             :alternatives="{{ $alternatives }}"
     ></app>
 </div>
