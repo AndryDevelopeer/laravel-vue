@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Alternative;
 use App\Models\Expenses;
-use Illuminate\Http\Request;
+use App\Models\Visitor;
+use Illuminate\Contracts\Support\Renderable;
+use ipinfo\ipinfo\IPinfo;
+use ipinfo\ipinfo\IPinfoException;
 
 class HomeController extends Controller
 {
@@ -15,19 +18,35 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         $expenses = Expenses::first();
         $alternatives = Alternative::all();
 
-        return view('index', ['amount' => $expenses->price, 'alternatives' => $alternatives]);
+        try {
+            $client = new IPinfo(env('IP_INFO_KEY'));
+            $details = $client->getDetails(request()->ip());
+            $country = $details->country_name;
+            $city = $details->city;
+        } catch (IPinfoException $e) {
+            //@TODO логировать
+        } finally {
+            Visitor::create([
+                'country' => $country ?? null,
+                'city' => $city ?? null,
+                'ip_address' => request()->ip(),
+                'device' => request()->header('User-Agent'),
+            ]);
+
+            return view('index', ['amount' => $expenses->price, 'alternatives' => $alternatives]);
+        }
     }
 }

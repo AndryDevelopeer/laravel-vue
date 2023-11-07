@@ -44,7 +44,6 @@ export default {
     mounted(): void {
         this.count = this.amount
         this.setCount()
-        console.log(this.alternatives)
     }
 }
 </script>

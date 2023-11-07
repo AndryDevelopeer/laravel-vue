@@ -73,7 +73,7 @@ class WarAlternativeEditScreen extends Screen
                     ->horizontal(),
                 Input::make('name')
                     ->type('text')
-                    ->title('Название альтернативы')
+                    ->title('Название альтернативы в ед. числе')
                     ->value($this->alternative->name)
                     ->horizontal(),
                 Input::make('price')

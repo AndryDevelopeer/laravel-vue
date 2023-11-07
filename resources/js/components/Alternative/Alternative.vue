@@ -1,11 +1,12 @@
 <template>
-    <div>
-        {{ apartmentAmount }} {{ alternative.name }}
+    <div v-if="alternativeAmount > 0">
+        {{ alternativeAmount }} {{ addCorrectEnding(alternativeAmount, alternative.name) }}
     </div>
 </template>
 
 <script lang="ts">
 import {IAlternative} from "../../interfaces/IAlternative"
+import postfix from "../../mixins/postfix"
 
 export default {
     name: "Alternative",
@@ -19,8 +20,9 @@ export default {
             required: true
         }
     },
+    mixins: [postfix],
     computed: {
-        apartmentAmount(): number {
+        alternativeAmount(): number {
             return Math.floor(this.total / this.alternative.price)
         }
     }
