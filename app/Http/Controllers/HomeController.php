@@ -49,6 +49,7 @@ class HomeController extends Controller
             return view('index', [
                 'amount' => $expenses->price,
                 'costPerSecond' => $expenses->cost_per_second,
+                'refreshInterval' => $expenses->refresh_interval_milliseconds,
                 'alternatives' => $alternatives
             ]);
         }

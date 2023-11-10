@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\War;
 
 use Illuminate\Http\RedirectResponse;
 use JetBrains\PhpStorm\ArrayShape;
+use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Alert;
 use Orchid\Screen\Actions\Button;
@@ -86,9 +87,17 @@ class WarExpensesEditScreen extends Screen
                     ->title('Траты в секунду в рублях')
                     ->value($this->expenses->cost_per_second)
                     ->horizontal(),
+                Input::make('refresh_interval_milliseconds')
+                    ->type('number')
+                    ->title('Интервал обновления в милисекундах')
+                    ->value($this->expenses->refresh_interval_milliseconds)
+                    ->horizontal(),
                 Button::make('Сохранить')
                     ->class('btn btn-success')
                     ->method('createOrUpdate'),
+                Button::make('Отмена')
+                    ->class('btn btn-secondary mt-2')
+                    ->action('javascript:history.back()'),
             ]),
         ];
     }
@@ -110,6 +119,7 @@ class WarExpensesEditScreen extends Screen
             'name' =>$request->get('name'),
             'price' => $request->get('price'),
             'cost_per_second' => $request->get('cost_per_second'),
+            'refresh_interval_milliseconds' => $request->get('refresh_interval_milliseconds'),
         ])->save();
 
         Alert::info('You have successfully created a expenses.');

@@ -82,8 +82,11 @@ class WarAlternativeEditScreen extends Screen
                     ->value($this->alternative->price)
                     ->horizontal(),
                 Button::make('Сохранить')
-                    ->class('btn btn-success')
+                    ->class('btn btn-success mr-2')
                     ->method('createOrUpdate'),
+                Button::make('Отмена')
+                    ->class('btn btn-secondary mt-2')
+                    ->action('javascript:history.back()'),
             ]),
         ];
     }

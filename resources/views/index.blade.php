@@ -15,6 +15,7 @@
             :amount="{{ $amount }}"
             :cost-per-second="{{ $costPerSecond }}"
             :alternatives="{{ $alternatives }}"
+            :refresh-interval="{{ $refreshInterval }}"
     ></app>
 </div>
 </body>

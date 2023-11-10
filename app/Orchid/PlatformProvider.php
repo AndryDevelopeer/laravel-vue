@@ -39,7 +39,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('War')
                 ->icon('bs.bar-chart')
-                ->route('platform.war'),
+                ->route('platform.war.expenses'),
 
             /*Menu::make('Sample Screen')
                 ->icon('bs.collection')
@@ -60,7 +60,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Visitors')
                 ->icon('bs.bar-chart')
-                ->route('platform.example.charts'),
+                ->route('platform.visitors'),
 
             /*Menu::make('Cards')
                 ->icon('bs.card-text')

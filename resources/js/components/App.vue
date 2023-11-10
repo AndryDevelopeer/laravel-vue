@@ -31,6 +31,10 @@ export default {
         costPerSecond: {
             type: Number,
             required: true
+        },
+        refreshInterval: {
+            type: Number,
+            required: true
         }
     },
     data() {
@@ -40,10 +44,10 @@ export default {
     },
     methods: {
         setCount(): void {
-            const factor = 100
+            const factor = 1000 / this.refreshInterval
             setInterval(() => {
                 this.count += this.costPerSecond / factor
-            }, 1000 / factor)
+            }, this.refreshInterval)
         }
     },
     mounted(): void {

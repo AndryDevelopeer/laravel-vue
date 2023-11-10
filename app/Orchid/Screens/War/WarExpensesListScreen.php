@@ -31,7 +31,7 @@ class WarExpensesListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Expenses';
+        return 'War expenses';
     }
 
     /**
@@ -39,7 +39,7 @@ class WarExpensesListScreen extends Screen
      */
     public function description(): ?string
     {
-        return "All expenses";
+        return "Затраты на войну";
     }
 
     /**

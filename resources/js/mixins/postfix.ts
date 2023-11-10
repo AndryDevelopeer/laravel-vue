@@ -30,7 +30,7 @@ const postfix = {
                 neutral: neutralEndings
             }
 
-            let ending: string = endings[gender][index];
+            let ending: string = endings[gender][index]
 
             return `${firstWord}${ending} ${withOutFirst}`
         }

@@ -28,7 +28,7 @@ class UpdateExpenseValue extends Command
     {
         $expense = Expenses::first();
         if ($expense) {
-            $expense->update(['price' => $expense->price += 1770000]);
+            $expense->update(['price' => $expense->price += $expense->cost_per_second]);
             $this->info('Value updated successfully.');
         } else {
             $this->error('No expenses found.');

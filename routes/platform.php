@@ -17,6 +17,7 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\Visitors\VisitorsScreen;
 use App\Orchid\Screens\War\WarAlternativeEditScreen;
 use App\Orchid\Screens\War\WarAlternativesListScreen;
 use App\Orchid\Screens\War\WarExpensesListScreen;
@@ -81,6 +82,13 @@ Route::screen('war/alternatives/{alternative?}', WarAlternativeEditScreen::class
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.war.alternatives')
         ->push(__('Alternative Edit'), route('platform.war.alternatives.edit')));
+
+// Platform > Visitors
+Route::screen('visitors', VisitorsScreen::class)
+    ->name('platform.visitors')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Visitors'), route('platform.visitors')));
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

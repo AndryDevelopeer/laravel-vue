@@ -41,6 +41,10 @@ class WarExpensesListLayout extends Table
                 ->render(function (Expenses $expenses) {
                     return number_format($expenses->cost_per_second, 0, ',', ' ');
                 }),
+            TD::make('refresh_interval_milliseconds', 'Интервал обновления на сайте (мсек.)')
+                ->render(function (Expenses $expenses) {
+                    return number_format($expenses->refresh_interval_milliseconds, 0, ',', ' ');
+                }),
             TD::make('created_at', 'Создано')
                 ->render(function (Expenses $expenses) {
                     return Carbon::parse($expenses->created_at)->format('d.m.Y H:i:s');
